@@ -1,5 +1,8 @@
 package id.gojek.trendingrepo
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,35 +10,44 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import id.gojek.trendingrepo.model.Repo
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class MainAdapter(private val repo: List<Repo>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(private val context: Context, private val repoCollection: List<Repo>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_trending_repo, parent, false))
     }
 
+    @SuppressLint("Range")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.llParent.onClick {
-            var expanded = repo.get(position).isExpanded
-            repo.get(position).isExpanded = !expanded
+            var expanded = repoCollection.get(position).isExpanded
+            repoCollection.get(position).isExpanded = !expanded
             notifyItemChanged(position)
         }
-        var expanded = repo.get(position).isExpanded
+        var expanded = repoCollection.get(position).isExpanded
         holder.llRepo.setVisibility(if (expanded) View.VISIBLE else View.GONE)
-        holder.tvAuthor.text = repo.get(position).author
-        holder.tvRepo.text = repo.get(position).name
-        holder.tvDescription.text = repo.get(position).description
-        holder.tvLanguage.text = repo.get(position).language
-//        holder.ivLanguage.backgroundColor = Color.parseColor(repo.get(position).languageColor)
-        holder.tvStarCount.text = repo.get(position).stars.toString()
-        holder.tvForkCount.text = repo.get(position).forks.toString()
+
+        Glide.with(context)
+            .load(repoCollection.get(position).avatar)
+            .into(holder.ivAvatar)
+
+        holder.tvAuthor.text = repoCollection.get(position).author
+        holder.tvRepo.text = repoCollection.get(position).name
+        holder.tvDescription.text = repoCollection.get(position).description
+        holder.tvLanguage.text = repoCollection.get(position).language
+        if(repoCollection.get(position).languageColor != null){
+            holder.ivLanguage.setColorFilter(Color.parseColor(repoCollection.get(position).languageColor))
+        }
+        holder.tvStarCount.text = repoCollection.get(position).stars.toString()
+        holder.tvForkCount.text = repoCollection.get(position).forks.toString()
     }
 
     override fun getItemCount(): Int {
-        return repo.size
+        return repoCollection.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

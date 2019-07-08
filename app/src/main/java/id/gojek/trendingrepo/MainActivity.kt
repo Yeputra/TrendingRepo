@@ -1,5 +1,6 @@
 package id.gojek.trendingrepo
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,12 +24,13 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
 
         rvRepo = findViewById(R.id.rv_trending_repo)
-        adapter = MainAdapter(MutableRepoCollection)
+        adapter = MainAdapter(this, MutableRepoCollection)
         rvRepo.adapter = adapter
         rvRepo.layoutManager = LinearLayoutManager(this)
 
         skeleton = rvRepo.applySkeleton(R.layout.item_trending_repo, 25)
         skeleton.maskCornerRadius = 50F
+        skeleton.shimmerColor = Color.parseColor("#DBDBDB")
 
         val request = ApiRepository()
         val gson = Gson()
