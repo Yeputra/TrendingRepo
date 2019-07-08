@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", '"https://github-trending-api.now.sh/"'
     }
     buildTypes {
         release {
@@ -28,9 +29,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
+    //anko
+    implementation "org.jetbrains.anko:anko:$anko_version"
+
     //3rd party lib
     implementation 'com.faltenreich:skeletonlayout:2.0.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
 
     //test
     testImplementation 'junit:junit:4.12'
