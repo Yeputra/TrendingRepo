@@ -1,4 +1,4 @@
-package id.gojek.trendingrepo
+package id.gojek.trendingrepo.activity
 
 import com.google.gson.Gson
 import id.gojek.trendingrepo.api.ApiRepository

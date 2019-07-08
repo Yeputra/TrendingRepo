@@ -1,4 +1,4 @@
-package id.gojek.trendingrepo
+package id.gojek.trendingrepo.activity
 
 import id.gojek.trendingrepo.model.Repo
 

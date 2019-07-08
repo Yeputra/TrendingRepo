@@ -1,4 +1,4 @@
-package id.gojek.trendingrepo
+package id.gojek.trendingrepo.activity
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.google.gson.Gson
+import id.gojek.trendingrepo.R
 import id.gojek.trendingrepo.api.ApiRepository
 import id.gojek.trendingrepo.model.Repo
 
