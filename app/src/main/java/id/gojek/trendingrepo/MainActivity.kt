@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity(), MainView {
         rvRepo.adapter = adapter
         rvRepo.layoutManager = LinearLayoutManager(this)
 
-        skeleton = rvRepo.applySkeleton(R.layout.item_trending_repo, 5)
+        skeleton = rvRepo.applySkeleton(R.layout.item_trending_repo, 25)
+        skeleton.maskCornerRadius = 50F
 
         val request = ApiRepository()
         val gson = Gson()
