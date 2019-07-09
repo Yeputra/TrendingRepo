@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,9 +24,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.onRefresh
 
+
+
 class MainActivity : AppCompatActivity(), MainView {
 
-    private var MutableRepoCollection : MutableList<Repo> = mutableListOf()
+    private var mutableRepoCollection : MutableList<Repo> = mutableListOf()
     private lateinit var presenter: MainPresenter
     private lateinit var adapter: MainAdapter
     private lateinit var skeleton: Skeleton
@@ -47,9 +50,23 @@ class MainActivity : AppCompatActivity(), MainView {
 
         presenter.getRepoList(sort, isNetworkConnected())
 
+        if (savedInstanceState != null) {
+            val savedRepoList: ArrayList<Repo>
+            savedRepoList = savedInstanceState.getParcelableArrayList("repo_list")
+            adapter = MainAdapter(this, savedRepoList)
+            rvRepo.setAdapter(adapter)
+        } else {
+            presenter.getRepoList(sort, isNetworkConnected())
+        }
+
         slParent.onRefresh {
             presenter.getRepoList(sort, isNetworkConnected())
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelableArrayList("repo_list", ArrayList<Parcelable>(mutableRepoCollection))
     }
 
     private fun initView() {
@@ -61,7 +78,7 @@ class MainActivity : AppCompatActivity(), MainView {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        adapter = MainAdapter(this, MutableRepoCollection)
+        adapter = MainAdapter(this, mutableRepoCollection)
         rvRepo.adapter = adapter
         rvRepo.layoutManager = LinearLayoutManager(this)
 
@@ -118,8 +135,8 @@ class MainActivity : AppCompatActivity(), MainView {
         rvRepo.visibility = View.VISIBLE
         llOfflineState.visibility = View.GONE
         btnRetry.visibility = View.GONE
-        MutableRepoCollection.clear()
-        MutableRepoCollection.addAll(repoCollection)
+        mutableRepoCollection.clear()
+        mutableRepoCollection.addAll(repoCollection)
         adapter.notifyDataSetChanged()
     }
 
