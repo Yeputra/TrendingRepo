@@ -1,5 +1,6 @@
 package id.gojek.trendingrepo.activity
 
+import android.util.Log
 import com.google.gson.Gson
 import id.gojek.trendingrepo.api.ApiRepository
 import id.gojek.trendingrepo.api.TrendingRepoApi
@@ -22,11 +23,18 @@ class MainPresenter(
                 Array<Repo>::class.java
             ).toList()
 
-            uiThread {
-                view.hideSkeleton()
-                view.showRepoList(data)
+            try {
+                uiThread {
+                    val crashLogger = { throwable: Throwable -> throwable.printStackTrace() }
+                    Log.d("retrieve", crashLogger.toString())
+                    view.hideSkeleton()
+                    view.showRepoList(data)
+                }
+            } catch (e: java.lang.RuntimeException) {
+                uiThread {
+                    Log.d("gagal", "Gagal retrieve data")
+                }
             }
         }
     }
-
 }

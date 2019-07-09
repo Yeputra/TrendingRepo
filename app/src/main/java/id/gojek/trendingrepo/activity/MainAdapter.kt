@@ -3,7 +3,6 @@ package id.gojek.trendingrepo.activity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import id.gojek.trendingrepo.R
 import id.gojek.trendingrepo.model.Repo
-import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MainAdapter(private val context: Context, private val repoCollection: List<Repo>) :

@@ -42,11 +42,67 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_trending_repo"
+
+        <FrameLayout
+                android:id="@+id/fl_offline_state"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_trending_repo"/>
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:id="@+id/ll_offlinie_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/nointernet_connection"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/something_went_wrong"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/wentWrongTextColor"
+                        android:textSize="15dp"
+                        android:layout_marginTop="24dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="An alien is probably blocking your signal."
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/alienTextColor"
+                        android:textSize="15dp"
+                        android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/btn_retry"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:text="RETRY"
+                    android:textSize="15dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/retryBtnColor"
+                    android:background="@drawable/bg_retry_button"
+                    android:layout_margin="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_trending_repo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_trending_repo"/>
+
+        </FrameLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

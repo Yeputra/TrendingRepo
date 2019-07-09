@@ -7,4 +7,7 @@
 
     <color name="toolbarTextColor">#25282B</color>
     <color name="nameTextColor">#52575C</color>
+    <color name="wentWrongTextColor">#4A4A4A</color>
+    <color name="alienTextColor">#929292</color>
+    <color name="retryBtnColor">#31B057</color>
 </resources>
