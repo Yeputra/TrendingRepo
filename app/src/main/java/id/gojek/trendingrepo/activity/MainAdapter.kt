@@ -3,6 +3,7 @@ package id.gojek.trendingrepo.activity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import id.gojek.trendingrepo.R
 import id.gojek.trendingrepo.model.Repo
+import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MainAdapter(private val context: Context, private val repoCollection: List<Repo>) :
@@ -38,6 +40,8 @@ class MainAdapter(private val context: Context, private val repoCollection: List
         }
         var expanded = repoCollection.get(position).isExpanded
         holder.llRepo.setVisibility(if (expanded) View.VISIBLE else View.GONE)
+        holder.viewCollapsed.setVisibility(if (expanded) View.GONE else View.VISIBLE)
+        holder.viewExpanded.setVisibility(if (expanded) View.VISIBLE else View.GONE)
 
         Glide.with(context)
             .load(repoCollection.get(position).avatar)
@@ -79,6 +83,8 @@ class MainAdapter(private val context: Context, private val repoCollection: List
         val ivLanguage: ImageView = itemView.findViewById(R.id.iv_language_color)
         val llRepo: LinearLayout = itemView.findViewById(R.id.ll_repo_item)
         val llParent: LinearLayout = itemView.findViewById(R.id.ll_parent)
+        val viewCollapsed: View = itemView.findViewById(R.id.view_collapsed)
+        val viewExpanded: View = itemView.findViewById(R.id.view_expanded)
     }
 }
 

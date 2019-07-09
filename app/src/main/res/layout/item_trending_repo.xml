@@ -19,9 +19,11 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_avatar"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="16dp"/>
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -30,23 +32,26 @@
 
                 <TextView
                         android:id="@+id/tv_author_name"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginRight="8dp"
-                        android:text="username"/>
+                        android:textSize="12sp"
+                        android:textColor="@color/nameTextColor"
+                        android:text="username"
+                        android:fontFamily="@font/roboto"/>
 
                 <TextView
                         android:id="@+id/tv_repo_name"
-                        android:layout_width="match_parent"
+                        android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:text="repo name"
-                        android:textSize="20sp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginRight="8dp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-light"/>
+                        android:textSize="15sp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginRight="36dp"
+                        android:textColor="@color/nameTextColor"
+                        android:fontFamily="@font/roboto_medium"/>
 
                 <LinearLayout
                         android:id="@+id/ll_repo_item"
@@ -59,7 +64,8 @@
                             android:id="@+id/tv_repo_description"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
+                            android:layout_marginRight="16dp"
+                            android:textSize="12dp"
                             android:text="description"/>
 
                     <LinearLayout
@@ -73,8 +79,8 @@
 
                         <ImageView
                                 android:id="@+id/iv_language_color"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
                                 android:layout_marginRight="4dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/circle_language"/>
@@ -84,12 +90,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="24dp"
+                                android:textColor="@color/nameTextColor"
+                                android:fontFamily="@font/roboto"
                                 android:text="Kotlin"/>
 
                         <ImageView
                                 android:id="@+id/iv_star"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
                                 android:layout_marginRight="4dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/star_yellow_16"/>
@@ -99,12 +107,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="24dp"
+                                android:textColor="@color/nameTextColor"
+                                android:fontFamily="@font/roboto"
                                 android:text="14,312"/>
 
                         <ImageView
                                 android:id="@+id/iv_fork"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
                                 android:layout_marginRight="4dp"
                                 android:layout_gravity="center"
                                 android:src="@drawable/fork_black_16"/>
@@ -113,7 +123,9 @@
                                 android:id="@+id/tv_fork_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="9,622"/>
+                                android:text="9,622"
+                                android:textColor="@color/nameTextColor"
+                                android:fontFamily="@font/roboto"/>
 
                     </LinearLayout>
 
@@ -124,9 +136,17 @@
         </LinearLayout>
 
         <View
+                android:id="@+id/view_collapsed"
                 android:layout_width="match_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="1dp"
                 android:background="@color/lightGray"/>
+
+        <View
+                android:id="@+id/view_expanded"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:visibility="gone"
+                android:background="@drawable/dropshadow"/>
 
     </LinearLayout>
 

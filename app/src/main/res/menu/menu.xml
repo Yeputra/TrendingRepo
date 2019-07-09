@@ -2,8 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/mainActionCamera"
-            android:icon="@drawable/more_black_24"
-            android:title="@string/more"
-            app:showAsAction="ifRoom"/>
+            android:id="@+id/sort_by_stars"
+            android:title="Sort by stars"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/sort_by_name"
+            android:orderInCategory="2"
+            app:showAsAction="never"
+            android:title="Sort by name"/>
 </menu>

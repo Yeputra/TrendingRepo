@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_width="match_parent"
             android:minHeight="?attr/actionBarSize"
             android:background="@color/colorPrimaryDark">
@@ -19,9 +19,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Trending"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="21sp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:textColor="@color/toolbarTextColor"
                 android:layout_gravity="center"/>
 
     </androidx.appcompat.widget.Toolbar>
@@ -31,7 +33,7 @@
 
         <View android:layout_width="match_parent"
               android:layout_height="1dp"
-              android:background="@drawable/toolbar_dropshadow"/>
+              android:background="@drawable/dropshadow"/>
 
     </FrameLayout>
 
