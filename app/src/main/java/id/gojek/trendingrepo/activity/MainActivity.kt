@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var skeleton: Skeleton
     private lateinit var rvRepo: RecyclerView
     private lateinit var slParent: SwipeRefreshLayout
+    private var sort = "default"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,18 +37,20 @@ class MainActivity : AppCompatActivity(), MainView {
         val gson = Gson()
         presenter = MainPresenter(this, request, gson)
 
-        presenter.getRepoList()
+        presenter.getRepoList(sort)
 
         slParent.onRefresh {
-            presenter.getRepoList()
+            presenter.getRepoList(sort)
         }
     }
 
     private fun initView() {
         rvRepo = findViewById(R.id.rv_trending_repo)
         slParent = findViewById(R.id.sl_parent)
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
         adapter = MainAdapter(this, MutableRepoCollection)
         rvRepo.adapter = adapter
         rvRepo.layoutManager = LinearLayoutManager(this)
@@ -59,6 +63,23 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when (item?.itemId) {
+            R.id.sort_by_stars -> {
+                sort = "star"
+                presenter.getRepoList(sort)
+                return true
+            }
+            R.id.sort_by_name -> {
+                sort = "name"
+                presenter.getRepoList(sort)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showSkeleton() {

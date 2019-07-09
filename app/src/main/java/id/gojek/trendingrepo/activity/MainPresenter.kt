@@ -14,21 +14,28 @@ class MainPresenter(
     private val gson: Gson
 ) {
 
-    fun getRepoList() {
+    fun getRepoList(sort: String) {
         view.showSkeleton()
         doAsync {
-            val data: List<Repo> = gson.fromJson(
+            val repoData: List<Repo> = gson.fromJson(
                 apiRepository
                     .doRequest(TrendingRepoApi.getRepo()),
                 Array<Repo>::class.java
             ).toList()
 
+            val starSortData = repoData.sortedByDescending { it.stars }
+            val nameSortData = repoData.sortedBy { it.name }
+
             try {
                 uiThread {
-                    val crashLogger = { throwable: Throwable -> throwable.printStackTrace() }
-                    Log.d("retrieve", crashLogger.toString())
                     view.hideSkeleton()
-                    view.showRepoList(data)
+                    if (sort == "star"){
+                        view.showRepoList(starSortData)
+                    } else if (sort == "name"){
+                        view.showRepoList(nameSortData)
+                    } else {
+                        view.showRepoList(repoData)
+                    }
                 }
             } catch (e: java.lang.RuntimeException) {
                 uiThread {
