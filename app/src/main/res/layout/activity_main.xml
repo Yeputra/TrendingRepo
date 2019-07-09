@@ -44,12 +44,11 @@
 
 
         <FrameLayout
-                android:id="@+id/fl_offline_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             <LinearLayout
-                    android:id="@+id/ll_offlinie_state"
+                    android:id="@+id/ll_offline_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -94,6 +93,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="@color/retryBtnColor"
                     android:background="@drawable/bg_retry_button"
+                    android:foreground="?attr/selectableItemBackground"
                     android:layout_margin="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView

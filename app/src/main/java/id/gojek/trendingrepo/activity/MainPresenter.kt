@@ -14,34 +14,38 @@ class MainPresenter(
     private val gson: Gson
 ) {
 
-    fun getRepoList(sort: String) {
+    fun getRepoList(sort: String, networkInfo: Boolean) {
         view.showSkeleton()
-        doAsync {
-            val repoData: List<Repo> = gson.fromJson(
-                apiRepository
-                    .doRequest(TrendingRepoApi.getRepo()),
-                Array<Repo>::class.java
-            ).toList()
+        if (networkInfo){
+            doAsync {
+                val repoData: List<Repo> = gson.fromJson(
+                    apiRepository
+                        .doRequest(TrendingRepoApi.getRepo()),
+                    Array<Repo>::class.java
+                ).toList()
 
-            val starSortData = repoData.sortedByDescending { it.stars }
-            val nameSortData = repoData.sortedBy { it.name }
+                val starSortData = repoData.sortedByDescending { it.stars }
+                val nameSortData = repoData.sortedBy { it.name }
 
-            try {
-                uiThread {
-                    view.hideSkeleton()
-                    if (sort == "star"){
-                        view.showRepoList(starSortData)
-                    } else if (sort == "name"){
-                        view.showRepoList(nameSortData)
-                    } else {
-                        view.showRepoList(repoData)
+                try {
+                    uiThread {
+                        view.hideSkeleton()
+                        if (sort == "star"){
+                            view.showRepoList(starSortData)
+                        } else if (sort == "name"){
+                            view.showRepoList(nameSortData)
+                        } else {
+                            view.showRepoList(repoData)
+                        }
+                    }
+                } catch (e: java.lang.RuntimeException) {
+                    uiThread {
+                        Log.d("gagal", "Gagal retrieve data")
                     }
                 }
-            } catch (e: java.lang.RuntimeException) {
-                uiThread {
-                    Log.d("gagal", "Gagal retrieve data")
-                }
             }
+        } else {
+            view.showErrorState()
         }
     }
 }
