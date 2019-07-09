@@ -72,3 +72,4 @@ data class Repo(@SerializedName("forks")
         }
     }
 }
+
