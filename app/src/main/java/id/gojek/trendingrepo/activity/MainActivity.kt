@@ -3,6 +3,7 @@ package id.gojek.trendingrepo.activity
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -12,6 +13,7 @@ import com.google.gson.Gson
 import id.gojek.trendingrepo.R
 import id.gojek.trendingrepo.api.ApiRepository
 import id.gojek.trendingrepo.model.Repo
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.support.v4.onRefresh
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -27,15 +29,7 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rvRepo = findViewById(R.id.rv_trending_repo)
-        slParent = findViewById(R.id.sl_parent)
-        adapter = MainAdapter(this, MutableRepoCollection)
-        rvRepo.adapter = adapter
-        rvRepo.layoutManager = LinearLayoutManager(this)
-
-        skeleton = rvRepo.applySkeleton(R.layout.item_trending_repo, 25)
-        skeleton.maskCornerRadius = 50F
-        skeleton.shimmerColor = Color.parseColor("#DBDBDB")
+        initView()
 
         val request = ApiRepository()
         val gson = Gson()
@@ -46,6 +40,25 @@ class MainActivity : AppCompatActivity(), MainView {
         slParent.onRefresh {
             presenter.getRepoList()
         }
+    }
+
+    private fun initView() {
+        rvRepo = findViewById(R.id.rv_trending_repo)
+        slParent = findViewById(R.id.sl_parent)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        adapter = MainAdapter(this, MutableRepoCollection)
+        rvRepo.adapter = adapter
+        rvRepo.layoutManager = LinearLayoutManager(this)
+
+        skeleton = rvRepo.applySkeleton(R.layout.item_trending_repo, 25)
+        skeleton.maskCornerRadius = 50F
+        skeleton.shimmerColor = Color.parseColor("#DBDBDB")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     override fun showSkeleton() {
