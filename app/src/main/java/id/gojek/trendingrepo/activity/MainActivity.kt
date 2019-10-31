@@ -24,11 +24,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.onRefresh
 
-
-
 class MainActivity : AppCompatActivity(), MainView {
 
-    private var mutableRepoCollection : MutableList<Repo> = mutableListOf()
+    private var mutableRepoCollection: MutableList<Repo> = mutableListOf()
     private lateinit var presenter: MainPresenter
     private lateinit var adapter: MainAdapter
     private lateinit var skeleton: Skeleton
@@ -90,7 +88,8 @@ class MainActivity : AppCompatActivity(), MainView {
             rvRepo.visibility = View.VISIBLE
             llOfflineState.visibility = View.GONE
             btnRetry.visibility = View.GONE
-            presenter.getRepoList(sort, isNetworkConnected()) }
+            presenter.getRepoList(sort, isNetworkConnected())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
